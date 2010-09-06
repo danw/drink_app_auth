@@ -1,0 +1,11 @@
+{application, drink_app_auth,
+ [{description, "Drink App Auth"},
+  {vsn, "1.0"},
+  {modules, [drink_app_auth_app,
+             drink_app_auth_sup,
+             drink_app_auth]},
+  {registered,[]},
+  {applications, [kernel, stdlib, sasl]},
+  {mod, {drink_app_auth_app, []}},
+  {start_phases, []}
+]}.
