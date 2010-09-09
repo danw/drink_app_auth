@@ -48,7 +48,6 @@ init ([]) ->
             {disc_copies, [node()]},
             {ram_copies, []},
             {record_name, app},
-            {index, [name]},
             {attributes, record_info(fields, app)}]) of
         {atomic, ok} -> ok;
         {aborted, {already_exists, _}} -> ok;
