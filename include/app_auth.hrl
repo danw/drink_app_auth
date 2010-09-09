@@ -1,5 +1,5 @@
 %%%-------------------------------------------------------------------
-%%% File    : drink_app_auth_sup.erl
+%%% File    : app_auth.hrl
 %%% Author  : Dan Willemsen <dan@csh.rit.edu>
 %%% Purpose : 
 %%%
@@ -23,29 +23,6 @@
 %%%
 %%%-------------------------------------------------------------------
 
--module (drink_app_auth_sup).
--behaviour (supervisor).
-
--export ([start/0, start_link/1, init/1]).
-
-start () ->
-    start_link([]).
-
-start_link (Args) ->
-    supervisor:start_link({local,?MODULE}, ?MODULE, Args).
-
-init ([]) ->
-    {ok, {{one_for_one, 10, 3},
-            [{drink_app_auth,
-              {drink_app_auth, start_link, []},
-              permanent,
-              100,
-              worker,
-              [drink_app_auth]},
-             {drink_app_auth_appdb,
-              {drink_app_auth_appdb, start_link, []},
-              permanent,
-              100,
-              worker,
-              [drink_app_auth_appdb]}]}}.
+-record (app, {name, owner, description, key, owner_only, trusted, requested_perms}).
+-record (login_ref, {key, username, perms}).
 
