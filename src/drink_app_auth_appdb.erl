@@ -71,14 +71,14 @@ handle_call ({new, App}, _From, State) ->
         end
     end) of
         {atomic, ok} ->
-            dw_events:send(auth_apps, {app_new, App}),
+            dw_events:send(drink_app_auth, {app_new, App}),
             {reply, ok, State};
         _ -> {reply, {error, mnesia}, State}
     end;
 handle_call ({delete, Name}, _From, State) ->
     case mnesia:transaction(fun() -> mnesia:delete({auth_appdb, Name}) end) of
         {atomic, ok} -> 
-            dw_events:send(auth_apps, {app_deleted, Name}),
+            dw_events:send(drink_app_auth, {app_deleted, Name}),
             {reply, ok, State};
         _ -> {reply, {error, mnesia}, State}
     end;
